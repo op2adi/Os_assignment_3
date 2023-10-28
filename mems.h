@@ -37,7 +37,7 @@ Input Parameter: Nothing
 Returns: Nothing
 */
 void mems_init(){
-     struct main* head;
+    //  struct main* head;
         
 }
 
