@@ -48,7 +48,7 @@ int main(int argc, char const *argv[])
     mems_print_stats();
     ptr[3] = (int*)mems_malloc(sizeof(int)*250);
     mems_print_stats();
-    // mems_finish();
-    // mems_print_stats();
+    mems_finish();
+    mems_print_stats();
     return 0;
 }

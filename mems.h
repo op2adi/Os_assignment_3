@@ -182,3 +182,16 @@ void mems_print_stats() {
     printf("Number of Holes: %d\n", hole_count);
     printf("Number of Process Segments: %d\n", process_count);
 }
+
+void mems_finish() {
+    struct mems_mainchain_node* block = mems_free_list;
+    struct mems_mainchain_node* next_block;
+
+    while (block != NULL) {
+        next_block = block->next;
+        munmap(block, block->total_size);
+        block = next_block;
+    }
+    mems_free_list = NULL;
+    mems_heap_start = NULL;
+}
