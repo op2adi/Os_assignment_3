@@ -6,15 +6,16 @@ int main(int argc, char const *argv[])
 {
     // initialise the MeMS system 
     mems_init();
-    int* ptr[10];
+    int* ptr[73];
 
     /*
     This allocates 10 arrays of 250 integers each
     */
     printf("\n------- Allocated virtual addresses [mems_malloc] -------\n");
-    for(int i=0;i<10;i++){
-        ptr[i] = (int*)mems_malloc(sizeof(int)*250);
+    for(int i=0;i<73;i++){
+        ptr[i] = (int*)mems_malloc(sizeof(int)*4095);
         printf("Virtual address: %lu\n", (unsigned long)ptr[i]);
+        // mems_print_stats();
     }
 
     /*
@@ -30,7 +31,7 @@ int main(int argc, char const *argv[])
     int* phy_ptr= (int*) mems_get(&ptr[0][1]); // get the address of index 1
     phy_ptr[0]=200; // put value at index 1
     int* phy_ptr2= (int*) mems_get(&ptr[0][0]); // get the address of index 0
-    printf("Virtual address: %lu\tPhysical Address: %lu\n",(unsigned long)ptr[0],(unsigned long)phy_ptr2);
+    printf("Virtual address: %lu\tPhysical Address: %lu\n",(unsigned long)ptr[0],(unsigned long)phy_ptr);
     printf("Value written: %d\n", phy_ptr2[1]); // print the address of index 1 
 
     /*
@@ -48,7 +49,8 @@ int main(int argc, char const *argv[])
     mems_print_stats();
     ptr[3] = (int*)mems_malloc(sizeof(int)*250);
     mems_print_stats();
+
+    printf("\n--------- Unmapping all memory [mems_finish] --------\n\n");
     mems_finish();
-    mems_print_stats();
     return 0;
 }
