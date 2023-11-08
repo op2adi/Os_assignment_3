@@ -1,19 +1,23 @@
 // include other header files as needed
-#include"mems.h"
+#include"mems2.h"
+#include <stdlib.h>
 
 
 int main(int argc, char const *argv[])
 {
     // initialise the MeMS system 
     mems_init();
-    int* ptr[73];
+    int* ptr[10];
 
     /*
+     ptr[i] = (int*)mems_malloc(sizeof(int)*45000);
     This allocates 10 arrays of 250 integers each
     */
+    // ptr[-1] = (int*)mems_malloc(4095);
+    // ptr[0]= (int*)mems_malloc(1000);
     printf("\n------- Allocated virtual addresses [mems_malloc] -------\n");
-    for(int i=0;i<73;i++){
-        ptr[i] = (int*)mems_malloc(sizeof(int)*4095);
+    for(int i=0;i<10;i++){
+        ptr[i] = (int*)mems_malloc(sizeof(int)*250);
         printf("Virtual address: %lu\n", (unsigned long)ptr[i]);
         // mems_print_stats();
     }
@@ -52,5 +56,7 @@ int main(int argc, char const *argv[])
 
     printf("\n--------- Unmapping all memory [mems_finish] --------\n\n");
     mems_finish();
+     mems_print_stats();
+    // exit(0);
     return 0;
 }

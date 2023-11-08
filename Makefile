@@ -2,7 +2,7 @@
 
 all: clean example 
 
-example: example.c mems.h
+example: example.c mems2.h
 	gcc -o example example.c
 
 clean:
