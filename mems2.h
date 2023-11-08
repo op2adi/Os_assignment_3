@@ -362,8 +362,7 @@ void mems_free(void * ptr){
 
             break;
         }
-
-        block = block->next;
+        block=block->next;
     }
     
 }
